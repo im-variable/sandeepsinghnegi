@@ -24,5 +24,6 @@ class RegisterView(APIView):
         """
         qs = User.objects.all()
         serializer = RegisterSerializer(qs, many=True)
-        
+
         return Response(serializer.data, status=status.HTTP_200_OK)
+        

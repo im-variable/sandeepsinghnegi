@@ -1,7 +1,9 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import AuthUserExtension
-from .backend import is_valid_mobile
+from .backend import is_valid_mobile 
+from .tasks import send_email_task
+from django.conf import settings
 
 class RegisterSerializer(serializers.ModelSerializer):
     id = serializers.CharField(read_only=True)
@@ -36,5 +38,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         #  validating mobile no.
         if "mobile" in authuserextension:
             AuthUserExtension.objects.create(user=user, mobile=get_mobile)  # Creating AuthUserExtension with 'mobile'
+               
+        send_email_task.delay(user.username, settings.EMAIL_HOST_USER, user.email)
 
         return user
