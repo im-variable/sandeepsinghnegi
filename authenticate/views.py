@@ -9,7 +9,7 @@ class RegisterView(APIView):
     
     def post(self, request):
         """
-        for registering user
+        for registering new user
         """
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -20,7 +20,7 @@ class RegisterView(APIView):
 
     def get(self, request):
         """
-        for get registered user
+        for geting registered users list
         """
         qs = User.objects.all()
         serializer = RegisterSerializer(qs, many=True)

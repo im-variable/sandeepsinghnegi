@@ -4,7 +4,7 @@ from celery import shared_task
 
 @shared_task
 def send_email_task(username, email_from, email_to):
-    """Sends an email when the user registered."""
+    """Sending an email when the user registered."""
     subject = 'welcome to sandeepsinghnegi.in world'
     message = f'Hi {username}, thank you for registering in sandeepsinghnegi.in.'
     recipient_list = [email_to, ]

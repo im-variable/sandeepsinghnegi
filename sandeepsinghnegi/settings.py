@@ -29,7 +29,6 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     'authenticate',
     'rest_framework',
     'celery',
-    # 'flower',
+    'flower',
     'django_celery_results',    
 ]
 
@@ -163,5 +162,5 @@ CACHES = {
     }
 }
 
-# BROKER_URL = CELERY_BROKER_URL
-# FLOWER_PORT = 5555 
+BROKER_URL = CELERY_BROKER_URL
+FLOWER_PORT = 5555 

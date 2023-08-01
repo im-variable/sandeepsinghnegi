@@ -18,12 +18,14 @@
 # - EMAIL_HOST_USER=***
 # - EMAIL_HOST_PASSWORD=***
 
-# command to run in terminal 
+# command to run project
 
 # - python manage.py makemigrations
 # - python manage.py migrate
 # - python manage.py runserver
 
+# command to run celery 
+# - python -m celery -A sandeepsinghnegi worker -l info
 
 # postman for calling api endpoints
 
