@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'authenticate',
     'rest_framework',
     'celery',
-    
+    # 'flower',
+    'django_celery_results',    
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,20 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'
   
 # set the celery result backend
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-  
-# set the celery timezone
-CELERY_TIMEZONE = 'UTC'
+
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+
+# celery setting.
+CELERY_CACHE_BACKEND = 'default'
+
+# django setting.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+    }
+}
+
+# BROKER_URL = CELERY_BROKER_URL
+# FLOWER_PORT = 5555 
